@@ -1,0 +1,41 @@
+
+--This procedure created for registration account--
+
+USE [Northwind]
+GO
+/****** Object:  StoredProcedure [dbo].[Register]    Script Date: 17.12.2022 22:17:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[Register]
+	-- Add the parameters for the stored procedure here
+	@Username nvarchar(50),
+	@Name nvarchar(50),
+	@Surname nvarchar(50),
+	@Password nvarchar(50),
+	@Email nvarchar(50),
+	@Out int out
+AS
+if exists (select username from ProjectUsers where Username = @username)
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SET @Out = 1;
+	SELECT @Out;
+END
+ELSE
+BEGIN
+	INSERT INTO ProjectUsers VALUES(@Username, @Name, @Surname, @Password, @Email);
+	SET @Out = 0;
+	SELECT @Out;
+END
